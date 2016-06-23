@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--ToolBar颜色-->
+    <color name="colorPrimary">#33CCCC</color>
+
+    <!--状态栏颜色-->
+    <color name="colorPrimaryDark">#99FFFF</color>
+
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="TabIndicatorColor">#33CCCC</color>
+
+    <!--首页tab字体颜色-->
+    <color name="tabTextPressed">#6633ff</color>
+    <color name="tabTextNormal">#9999ff</color>
+
+</resources>

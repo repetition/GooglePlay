@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">GooglePlay</string>
+    <string name="action_bar_add">Add</string>
+    <string name="action_bar_edit">Edit</string>
+    <string name="action_bar_share">Share</string>
+    <string name="action_bar_sort">Sort</string>
+    <string name="action_bar_sort_alpha">Alphabetically</string>
+    <string name="action_bar_sort_size">By size</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+    <string name="net_error">没有网络网络连接异常</string>
+    <!--tab信息-->
+    <string-array name="tab_list">
+        <item>首页</item>
+        <item>应用</item>
+        <item>游戏</item>
+        <item>专题</item>
+        <item>分类</item>
+        <item>排行</item>
+    </string-array>
+
+</resources>
