@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.googleplay.domain.AppInfo;
 import com.example.googleplay.holder.DetailAppInfoHolder;
@@ -55,6 +56,13 @@ public class AppDetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(appName);
         getSupportActionBar().setHomeButtonEnabled(true);//设置返回键可用
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(UIUtils.getContext(),"返回键点击了",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
 
         mLayoutDetail = (LinearLayout) findViewById(R.id.ll_Detail);
 /*

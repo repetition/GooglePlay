@@ -112,7 +112,6 @@ public class HomeHeaderHolder extends BaseHolder<ArrayList<String>> {
                 view.setBackgroundResource(R.drawable.indicator_selected);
             } else {
                 view.setBackgroundResource(R.drawable.indicator_normal);
-
             }
         }
     }

@@ -37,6 +37,7 @@ public class HomeFragment extends BaseFragment<AppInfo> {
         mListView = (ListView) mView.findViewById(R.id.listView);
         HomeAdapter adapter = new HomeAdapter(mAppInfoList);
         mListView.setAdapter(adapter);
+
         /*添加首页轮播图*/
         HomeHeaderHolder holder = new HomeHeaderHolder();
         holder.setData(mProtocol.getPictureList());
