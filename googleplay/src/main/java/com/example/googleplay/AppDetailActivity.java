@@ -1,5 +1,6 @@
 package com.example.googleplay;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.googleplay.domain.AppInfo;
 import com.example.googleplay.holder.DetailAppInfoHolder;
+import com.example.googleplay.holder.DetailSafeHolder;
 import com.example.googleplay.http.protocol.HomeDetailProtocol;
 import com.example.googleplay.utils.UIUtils;
 import com.example.googleplay.view.LoadingPage;
@@ -59,7 +61,7 @@ public class AppDetailActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UIUtils.getContext(),"返回键点击了",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UIUtils.getContext(), "返回键点击了", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -86,21 +88,47 @@ public class AppDetailActivity extends AppCompatActivity {
         //创建成功的布局
         // View view = UIUtils.inflate(R.layout.detail_appinfo);
 
-        FrameLayout detailInfo = new FrameLayout(AppDetailActivity.this);
-        detailInfo.setBackgroundResource(R.drawable.app_item_bg_selector);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        int margins = (int) UIUtils.dip2px(3);
-        params.setMargins(margins,margins,margins,margins);
-        detailInfo.setLayoutParams(params);
+        LinearLayout detailRoot = new LinearLayout(AppDetailActivity.this);
+        //detailInfo.setBackgroundResource(R.drawable.app_item_bg_selector);
+        FrameLayout.LayoutParams paramsRoot = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        // int margins = (int) UIUtils.dip2px(3);
+        // params.setMargins(margins,margins,margins,margins);
+        detailRoot.setLayoutParams(paramsRoot);
+        detailRoot.setBackgroundColor(Color.BLACK);
+        detailRoot.setOrientation(LinearLayout.VERTICAL);
 
         //初始化应用信息模块
         //FrameLayout flDetailAppInfo = (FrameLayout) view.findViewById(R.id.fl_detail_appinfo);
         //动态加添
         DetailAppInfoHolder detailAppInfoHolder = new DetailAppInfoHolder();
         detailAppInfoHolder.setData(mAppInfo);
-        detailInfo.addView(detailAppInfoHolder.getItemView());
+        View appInfo = detailAppInfoHolder.getItemView();
+        appInfo.setBackgroundResource(R.drawable.app_item_bg_selector);
+        LinearLayout.LayoutParams appInfoParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        int margins = (int) UIUtils.dip2px(3);
+        appInfoParams.setMargins(margins, 0, margins, 0);
+        appInfo.setLayoutParams(appInfoParams);
+        detailRoot.addView(appInfo);
 
-        return detailInfo;
+        // TODO: 2016/6/24  需要给字体设置大小,和颜色 
+        DetailSafeHolder safeHolder = new DetailSafeHolder();
+        safeHolder.setData(mAppInfo);
+        View safeDesView = safeHolder.getItemView();
+        safeDesView.setBackgroundResource(R.drawable.app_item_bg_selector);
+        LinearLayout.LayoutParams safeDesParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        //int margins = (int) UIUtils.dip2px(3);
+        safeDesParams.setMargins(margins,0,margins,margins);
+        safeDesView.setLayoutParams(safeDesParams);
+        detailRoot.addView(safeDesView);
+
+       /* detailInfo.setBackgroundResource(R.drawable.app_item_bg_selector);
+        FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        int margins1 = (int) UIUtils.dip2px(3);
+        params.setMargins(margins1,margins1,margins1,margins1);
+        safeDes.set
+        detailInfo.setLayoutParams(params);
+*/
+        return detailRoot;
     }
 
     /**

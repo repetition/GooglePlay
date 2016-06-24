@@ -26,15 +26,16 @@
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
-                android:textIsSelectable="true"
                 android:id="@+id/tv_appName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
+                android:layout_marginStart="22dp"
                 android:layout_toEndOf="@id/iv_appIcon"
                 android:layout_toRightOf="@id/iv_appIcon"
                 android:text="appname"
                 android:textColor="@android:color/black"
+                android:textIsSelectable="true"
                 android:textSize="20sp" />
 
             <RatingBar
@@ -44,6 +45,8 @@
                 android:layout_alignBottom="@id/iv_appIcon"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="22dp"
+                android:layout_marginStart="22dp"
+                android:layout_toEndOf="@id/iv_appIcon"
                 android:layout_toRightOf="@id/iv_appIcon"
                 android:indeterminateDrawable="@drawable/ratingbar"
                 android:isIndicator="true"
@@ -82,7 +85,8 @@
                 android:lines="1"
                 android:text="2016-12-12"
                 android:textColor="#666666"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                />
 
             <TextView
                 android:id="@+id/tv_appVersion"
