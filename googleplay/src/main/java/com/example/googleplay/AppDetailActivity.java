@@ -1,6 +1,5 @@
 package com.example.googleplay;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -94,7 +93,7 @@ public class AppDetailActivity extends AppCompatActivity {
         // int margins = (int) UIUtils.dip2px(3);
         // params.setMargins(margins,margins,margins,margins);
         detailRoot.setLayoutParams(paramsRoot);
-        detailRoot.setBackgroundColor(Color.BLACK);
+        //detailRoot.setBackgroundColor(Color.BLACK);
         detailRoot.setOrientation(LinearLayout.VERTICAL);
 
         //初始化应用信息模块

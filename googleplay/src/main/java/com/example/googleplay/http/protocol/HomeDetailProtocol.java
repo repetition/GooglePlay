@@ -65,7 +65,7 @@ public class HomeDetailProtocol extends BaseProtocol<AppInfo> {
                 SafeInfo safeInfo = new SafeInfo();
                 safeInfo.safeDes = obj1.getString("safeDes");
                 safeInfo.safeDesColor = obj1.getString("safeDesColor");
-                safeInfo.safeDes = obj1.getString("safeDesUrl");
+                safeInfo.safeDesUrl = obj1.getString("safeDesUrl");
                 safeInfo.safeUrl = obj1.getString("safeUrl");
                 safeList.add(safeInfo);
             }

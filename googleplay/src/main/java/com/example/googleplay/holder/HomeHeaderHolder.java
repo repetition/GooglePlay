@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.example.googleplay.MyApplication;
 import com.example.googleplay.R;
 import com.example.googleplay.adapter.HomeHeaderAdapter;
 import com.example.googleplay.utils.UIUtils;
@@ -121,16 +122,20 @@ public class HomeHeaderHolder extends BaseHolder<ArrayList<String>> {
      */
     class HomeHeaderTask implements Runnable {
 
-        public void start(){
+        public void start() {
             UIUtils.getHandler().removeCallbacksAndMessages(this);
-            UIUtils.getHandler().postDelayed(this,4000);
+            UIUtils.getHandler().postDelayed(this, 4000);
         }
 
         @Override
         public void run() {
-            int position = mPager.getCurrentItem();
-            mPager.setCurrentItem(position+1);
-            UIUtils.getHandler().postDelayed(this,4000);
+
+            if (MyApplication.isRun()) {
+                //isRun=true 才去滑动轮播图
+                int position = mPager.getCurrentItem();
+                mPager.setCurrentItem(position + 1);
+            }
+            UIUtils.getHandler().postDelayed(this, 4000);
         }
     }
 

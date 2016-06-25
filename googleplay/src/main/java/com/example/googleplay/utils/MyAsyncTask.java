@@ -51,13 +51,7 @@ public class MyAsyncTask extends AsyncTask<Object, Void, Bitmap> {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IOUtils.close(is);
         }
         return null;
     }

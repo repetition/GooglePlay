@@ -3,7 +3,6 @@ package com.example.googleplay;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Handler;
 
 import java.util.LinkedList;
@@ -19,22 +18,12 @@ public class MyApplication extends Application {
 
     private static List<Activity> mActivityList = new LinkedList<>();
 
-    private static SharedPreferences mPres;
+    private static boolean isRun = true;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
-        // mPres = getSharedPreferences("appConfig", MODE_PRIVATE);
-   /*     ThreadManager.instance().createLongPool().execute(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 6; i++) {
-                    UIUtils.getPreferences("appConfig").edit().remove("isFirstLoadData" + i).commit();
-                    Log.e("onDestroy", "isFirstLoadData" + i + ":被清除");
-                }
-            }
-        });*/
     }
 
 
@@ -46,10 +35,13 @@ public class MyApplication extends Application {
         return handler;
     }
 
-    public static SharedPreferences getPres() {
-        return mPres;
+    public static boolean isRun() {
+        return isRun;
     }
 
+    public static void setIsRun(boolean run) {
+        isRun = run;
+    }
 
     public static void addActivity(Activity activity) {
         mActivityList.add(activity);

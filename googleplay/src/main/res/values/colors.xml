@@ -14,4 +14,8 @@
     <color name="tabTextPressed">#6633ff</color>
     <color name="tabTextNormal">#9999ff</color>
 
+
+    <!--x详情页字体颜色-->
+    <color name="textColor">#666666</color>
+
 </resources>

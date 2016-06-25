@@ -318,6 +318,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.w("MainActivity","onResume");
+        MyApplication.setIsRun(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.w("MainActivity","onPause");
+        MyApplication.setIsRun(false);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.w("MainActivity","onStop");
+    }
 
     /**
      * 请求权限

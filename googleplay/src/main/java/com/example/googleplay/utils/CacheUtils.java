@@ -39,6 +39,8 @@ public class CacheUtils {
      */
     public void display(ImageView icon, String url) {
 
+        Log.i("CacheUtils","图片Url:"+url);
+
         if (TextUtils.isEmpty(url)){
             Log.i("CacheUtils","url为空了");
             return;
