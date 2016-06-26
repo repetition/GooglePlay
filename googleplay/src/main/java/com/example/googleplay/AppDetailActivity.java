@@ -109,11 +109,11 @@ public class AppDetailActivity extends AppCompatActivity {
         appInfo.setLayoutParams(appInfoParams);
         detailRoot.addView(appInfo);
 
-        // TODO: 2016/6/24  需要给字体设置大小,和颜色 
+        /*初始化安全描述模块*/
         DetailSafeHolder safeHolder = new DetailSafeHolder();
         safeHolder.setData(mAppInfo);
         View safeDesView = safeHolder.getItemView();
-        safeDesView.setBackgroundResource(R.drawable.app_item_bg_selector);
+        safeDesView.setBackgroundResource(R.mipmap.list_item_bg_normal);   // TODO: 2016/6/26 使用mipmap下的图片,解决 安全描述 隐藏时,没有全部隐藏 
         LinearLayout.LayoutParams safeDesParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         //int margins = (int) UIUtils.dip2px(3);
         safeDesParams.setMargins(margins,0,margins,margins);

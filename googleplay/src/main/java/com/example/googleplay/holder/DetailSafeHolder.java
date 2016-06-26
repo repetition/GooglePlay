@@ -3,6 +3,8 @@ package com.example.googleplay.holder;
 import android.animation.ValueAnimator;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,8 +28,12 @@ public class DetailSafeHolder extends BaseHolder<AppInfo> {
     private TextView[] mDesTexts;
     private LinearLayout[] mSafeDesBars;
     private ImageView mToggle;
-    private RelativeLayout mRLSafeDesBar;
+    private LinearLayout mLLDesRoot;
     private int mSafeDesHeight;
+
+    private boolean isOpen;
+    private ValueAnimator mAnimator;
+    private LinearLayout.LayoutParams mLLDesRootLayoutParams;
 
     @Override
     public View initView() {
@@ -59,9 +65,11 @@ public class DetailSafeHolder extends BaseHolder<AppInfo> {
         mSafeDesBars[2] = (LinearLayout) view.findViewById(R.id.ll_des3);
         mSafeDesBars[3] = (LinearLayout) view.findViewById(R.id.ll_des4);
 
-        mRLSafeDesBar = (RelativeLayout) view.findViewById(R.id.rl_safeDesBar);
+        mLLDesRoot = (LinearLayout) view.findViewById(R.id.ll_desRoot);
         mToggle = (ImageView) view.findViewById(R.id.iv_arrow_down);
-        mToggle.setOnClickListener(new View.OnClickListener() {
+
+        RelativeLayout mSafeDesBar = (RelativeLayout) view.findViewById(R.id.rl_safeDesBar);
+        mSafeDesBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toggle();
@@ -72,15 +80,39 @@ public class DetailSafeHolder extends BaseHolder<AppInfo> {
         return view;
     }
 
+    /**
+     * 设置 安全描述 显示隐藏动画
+     */
     private void toggle() {
-        ValueAnimator animator  = ValueAnimator.ofInt(0,100);
+        ValueAnimator animator; //描述隐藏的动画
+        RotateAnimation rotateAnimation; //箭头旋转动画
+
+        if (isOpen) {
+            isOpen = false;
+            //属性动画
+            animator = ValueAnimator.ofInt(mSafeDesHeight, 0);
+            rotateAnimation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        } else {
+            isOpen = true;
+            animator = ValueAnimator.ofInt(0, mSafeDesHeight);
+            rotateAnimation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            rotateAnimation.setFillAfter(true);
+        }
+
+        animator.setDuration(300);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                //animation.getDuration()
+                //给描述模块时时设置高度,实现过渡效果
+                Integer updateHeight = (Integer) animation.getAnimatedValue();
+                mLLDesRootLayoutParams.height = updateHeight;
+                mLLDesRoot.setLayoutParams(mLLDesRootLayoutParams);
             }
         });
+        animator.start();
 
+        rotateAnimation.setDuration(300);
+        mToggle.startAnimation(rotateAnimation);
     }
 
     @Override
@@ -103,9 +135,14 @@ public class DetailSafeHolder extends BaseHolder<AppInfo> {
         }
 
         //获取安全描述的 高度
-        mRLSafeDesBar.measure(0,0);
-        mSafeDesHeight = mRLSafeDesBar.getMeasuredHeight();
+        mLLDesRoot.measure(0, 0);
+        mSafeDesHeight = mLLDesRoot.getMeasuredHeight();
 
-        Log.i("DetailSafeHolder","安全描述高度:"+mSafeDesHeight);
+        Log.i("DetailSafeHolder", "安全描述高度:" + mSafeDesHeight);
+        //将安全描述信息隐藏掉
+        mLLDesRootLayoutParams = (LinearLayout.LayoutParams) mLLDesRoot.getLayoutParams();
+        mLLDesRootLayoutParams.height = 0;
+        mLLDesRoot.setLayoutParams(mLLDesRootLayoutParams);
+
     }
 }

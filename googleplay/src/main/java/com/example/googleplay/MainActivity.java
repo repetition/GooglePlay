@@ -100,10 +100,12 @@ public class MainActivity extends AppCompatActivity {
                 super.onDrawerOpened(drawerView);
             }
         };
+        //同步状态
         mDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mDrawerToggle);//将ActionBarDrawerToggle设置给侧滑菜单
         content = (CoordinatorLayout) findViewById(R.id.content);
         NavigationView mNavigationView = (NavigationView) findViewById(R.id.navigationView);
+        //设置Drawer菜单监听
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -116,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                Log.i("MainActivity","ToolBat高度:"+toolbar.getHeight()+";"+toolbar.getMeasuredHeight());
+                Log.i("MainActivity", "ToolBat高度:" + toolbar.getHeight() + ";" + toolbar.getMeasuredHeight());
             }
         });
 
@@ -127,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         int heightPixels = dm.heightPixels;
         float density = dm.density;
         int dpi = dm.densityDpi;
-        Log.w("MainActivity","分辨率:"+heightPixels+"x"+widthPixels+";屏幕密度:"+density+";Dpi:"+dpi);
+        Log.w("MainActivity", "分辨率:" + heightPixels + "x" + widthPixels + ";屏幕密度:" + density + ";Dpi:" + dpi);
 
     }
 
@@ -149,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         //  mPagerContent.setOffscreenPageLimit(5);
         mPagerContent.setAdapter(new PagerContentAdapter(getSupportFragmentManager()));
         mTabs.setupWithViewPager(mPagerContent);
+
 
         mPagerContent.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -321,21 +324,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.w("MainActivity","onResume");
+        Log.w("MainActivity", "onResume");
         MyApplication.setIsRun(true);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.w("MainActivity","onPause");
+        Log.w("MainActivity", "onPause");
         MyApplication.setIsRun(false);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.w("MainActivity","onStop");
+        Log.w("MainActivity", "onStop");
     }
 
     /**
