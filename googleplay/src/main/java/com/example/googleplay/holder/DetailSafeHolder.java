@@ -96,6 +96,7 @@ public class DetailSafeHolder extends BaseHolder<AppInfo> {
             isOpen = true;
             animator = ValueAnimator.ofInt(0, mSafeDesHeight);
             rotateAnimation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            //设置控件维持动画结束状态
             rotateAnimation.setFillAfter(true);
         }
 

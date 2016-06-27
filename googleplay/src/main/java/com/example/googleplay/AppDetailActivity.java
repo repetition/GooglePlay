@@ -11,7 +11,9 @@ import android.widget.Toast;
 
 import com.example.googleplay.domain.AppInfo;
 import com.example.googleplay.holder.DetailAppInfoHolder;
+import com.example.googleplay.holder.DetailDesInfoHolder;
 import com.example.googleplay.holder.DetailSafeHolder;
+import com.example.googleplay.holder.DetailScreenHolder;
 import com.example.googleplay.http.protocol.HomeDetailProtocol;
 import com.example.googleplay.utils.UIUtils;
 import com.example.googleplay.view.LoadingPage;
@@ -88,16 +90,11 @@ public class AppDetailActivity extends AppCompatActivity {
         // View view = UIUtils.inflate(R.layout.detail_appinfo);
 
         LinearLayout detailRoot = new LinearLayout(AppDetailActivity.this);
-        //detailInfo.setBackgroundResource(R.drawable.app_item_bg_selector);
         FrameLayout.LayoutParams paramsRoot = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-        // int margins = (int) UIUtils.dip2px(3);
-        // params.setMargins(margins,margins,margins,margins);
         detailRoot.setLayoutParams(paramsRoot);
-        //detailRoot.setBackgroundColor(Color.BLACK);
         detailRoot.setOrientation(LinearLayout.VERTICAL);
 
         //初始化应用信息模块
-        //FrameLayout flDetailAppInfo = (FrameLayout) view.findViewById(R.id.fl_detail_appinfo);
         //动态加添
         DetailAppInfoHolder detailAppInfoHolder = new DetailAppInfoHolder();
         detailAppInfoHolder.setData(mAppInfo);
@@ -120,13 +117,27 @@ public class AppDetailActivity extends AppCompatActivity {
         safeDesView.setLayoutParams(safeDesParams);
         detailRoot.addView(safeDesView);
 
-       /* detailInfo.setBackgroundResource(R.drawable.app_item_bg_selector);
-        FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        int margins1 = (int) UIUtils.dip2px(3);
-        params.setMargins(margins1,margins1,margins1,margins1);
-        safeDes.set
-        detailInfo.setLayoutParams(params);
-*/
+        /*初始化截图模块*/
+        DetailScreenHolder screenHolder = new DetailScreenHolder();
+        screenHolder.setData(mAppInfo);
+        LinearLayout.LayoutParams screenParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        screenParams.setMargins(0,margins,0,0);
+        View screenView = screenHolder.getItemView();
+        screenView.setLayoutParams(screenParams);
+        detailRoot.addView(screenView);
+
+        /*初始化应用介绍模块*/
+        // TODO: 2016/6/28 应用模块为开发完毕   截图模块需要调整间距
+        DetailDesInfoHolder desInfoHolder = new DetailDesInfoHolder();
+        desInfoHolder.setData(mAppInfo);
+        View desInfoView = desInfoHolder.getItemView();
+        desInfoView.setBackgroundResource(R.mipmap.list_item_bg_normal);
+        LinearLayout.LayoutParams desInfoParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        //int margins = (int) UIUtils.dip2px(3);
+        desInfoParams.setMargins(margins,0,margins,margins);
+        desInfoView.setLayoutParams(desInfoParams);
+        detailRoot.addView(desInfoView);
+
         return detailRoot;
     }
 
