@@ -2,6 +2,7 @@
 <HorizontalScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:scrollbars="none"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -17,6 +18,7 @@
             android:src="@drawable/ic_empty_page"/>
 
         <ImageView
+            android:layout_marginLeft="3dp"
             android:scaleType="fitXY"
             android:id="@+id/iv_screen2"
             android:layout_width="140dp"
@@ -24,6 +26,7 @@
             android:src="@drawable/ic_empty_page"/>
 
         <ImageView
+            android:layout_marginLeft="3dp"
             android:scaleType="fitXY"
             android:id="@+id/iv_screen3"
             android:layout_width="140dp"
@@ -31,6 +34,7 @@
             android:src="@drawable/ic_empty_page"/>
 
         <ImageView
+            android:layout_marginLeft="3dp"
             android:scaleType="fitXY"
             android:id="@+id/iv_screen4"
             android:layout_width="140dp"
@@ -38,6 +42,7 @@
             android:src="@drawable/ic_empty_page"/>
 
         <ImageView
+            android:layout_marginLeft="3dp"
             android:scaleType="fitXY"
             android:id="@+id/iv_screen5"
             android:layout_width="140dp"

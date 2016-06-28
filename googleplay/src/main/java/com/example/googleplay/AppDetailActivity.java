@@ -2,8 +2,10 @@ package com.example.googleplay;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -64,6 +66,7 @@ public class AppDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(UIUtils.getContext(), "返回键点击了", Toast.LENGTH_SHORT).show();
                 finish();
+                AppDetailActivity.this.overridePendingTransition(R.anim.scale_in, R.anim.side_out_frome_right);
             }
         });
 
@@ -76,6 +79,7 @@ public class AppDetailActivity extends AppCompatActivity {
         }*/
         /*将loadingPage添加到布局中*/
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        params.gravity = Gravity.CENTER_VERTICAL;
         mLoadingPage.setLayoutParams(params);
         mLayoutDetail.addView(mLoadingPage);
 
@@ -86,9 +90,8 @@ public class AppDetailActivity extends AppCompatActivity {
     private View onCreateSuccessView() {
 
 
-        //创建成功的布局
-        // View view = UIUtils.inflate(R.layout.detail_appinfo);
 
+        //创建成功的布局
         LinearLayout detailRoot = new LinearLayout(AppDetailActivity.this);
         FrameLayout.LayoutParams paramsRoot = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
         detailRoot.setLayoutParams(paramsRoot);
@@ -110,10 +113,11 @@ public class AppDetailActivity extends AppCompatActivity {
         DetailSafeHolder safeHolder = new DetailSafeHolder();
         safeHolder.setData(mAppInfo);
         View safeDesView = safeHolder.getItemView();
-        safeDesView.setBackgroundResource(R.mipmap.list_item_bg_normal);   // TODO: 2016/6/26 使用mipmap下的图片,解决 安全描述 隐藏时,没有全部隐藏 
+        // TODO: 2016/6/26 使用mipmap下的图片,解决 安全描述 隐藏时,没有全部隐藏
+        safeDesView.setBackgroundResource(R.mipmap.list_item_bg_normal);
         LinearLayout.LayoutParams safeDesParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         //int margins = (int) UIUtils.dip2px(3);
-        safeDesParams.setMargins(margins,0,margins,margins);
+        safeDesParams.setMargins(margins, 0, margins, margins);
         safeDesView.setLayoutParams(safeDesParams);
         detailRoot.addView(safeDesView);
 
@@ -121,24 +125,31 @@ public class AppDetailActivity extends AppCompatActivity {
         DetailScreenHolder screenHolder = new DetailScreenHolder();
         screenHolder.setData(mAppInfo);
         LinearLayout.LayoutParams screenParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        screenParams.setMargins(0,margins,0,0);
+        int screenMargins = (int) UIUtils.dip2px(5);
+        screenParams.setMargins(0, screenMargins, 0, screenMargins);
         View screenView = screenHolder.getItemView();
         screenView.setLayoutParams(screenParams);
         detailRoot.addView(screenView);
 
         /*初始化应用介绍模块*/
-        // TODO: 2016/6/28 应用模块为开发完毕   截图模块需要调整间距
         DetailDesInfoHolder desInfoHolder = new DetailDesInfoHolder();
         desInfoHolder.setData(mAppInfo);
         View desInfoView = desInfoHolder.getItemView();
         desInfoView.setBackgroundResource(R.mipmap.list_item_bg_normal);
         LinearLayout.LayoutParams desInfoParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         //int margins = (int) UIUtils.dip2px(3);
-        desInfoParams.setMargins(margins,0,margins,margins);
+        desInfoParams.setMargins(margins, 0, margins, margins);
         desInfoView.setLayoutParams(desInfoParams);
         detailRoot.addView(desInfoView);
 
-        return detailRoot;
+        /*将所有初始化的模块放到scrollView*/
+        // TODO: 2016/6/28   在代码里面添加这个滑动的view,解决加载失败时,布局会出现在顶部
+        NestedScrollView nestedScrollView = new NestedScrollView(UIUtils.getContext());
+        FrameLayout.LayoutParams scrollParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        nestedScrollView.setLayoutParams(scrollParams);
+        nestedScrollView.addView(detailRoot);
+
+        return nestedScrollView;
     }
 
     /**
